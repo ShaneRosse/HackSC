@@ -33,6 +33,13 @@ class ViewController: UIViewController {
         testObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
             print("Object has been saved.")
         }
+        
+        let assassin = Assassin(title: "King David Kalakaua",
+            locationName: "Waikiki Gateway Park",
+            discipline: "Sculpture",
+            coordinate: CLLocationCoordinate2D(latitude: 35.0500, longitude: -157.831661))
+        
+        mapView.addAnnotation(assassin)
     }
     func centerMapOnLocation(location: CLLocation) {
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
