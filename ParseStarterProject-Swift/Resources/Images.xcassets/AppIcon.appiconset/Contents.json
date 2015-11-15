@@ -59,6 +59,13 @@
       "idiom" : "ipad",
       "size" : "76x76",
       "scale" : "2x"
+    },
+    {
+      "size" : "29x29",
+      "idiom" : "ipad",
+      "filename" : "menu-alt-512.png",
+      "unassigned" : true,
+      "scale" : "1x"
     }
   ],
   "info" : {

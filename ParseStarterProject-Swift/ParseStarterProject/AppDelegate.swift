@@ -36,14 +36,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // ParseCrashReporting.enable()
         //
         // Uncomment and fill in with your Parse credentials:
-         Parse.setApplicationId("G24FfVKsrViqqtNtCdu3N1gyniJfX92eSYkBI5wL", clientKey: "6xJKhTcTdqqesLWY8J8RIn7tLQDYGTorOwFTVmqv")
+
+        
+        Parse.setApplicationId("2XHrhn7zxu2eBAVPbnTRCC78vCwP5zpnJdxsuBY0",
+            clientKey: "HB8adkuPIYxCMUS878bSn37X3iliPkwy3Qfdnk4L")
+        
+        
         //
         // If you are using Facebook, uncomment and add your FacebookAppID to your bundle's plist as
         // described here: https://developers.facebook.com/docs/getting-started/facebook-sdk-for-ios/
         // Uncomment the line inside ParseStartProject-Bridging-Header and the following line here:
         // PFFacebookUtils.initializeFacebook()
         // ****************************************************************************
-
+        
         PFUser.enableAutomaticUser()
 
         let defaultACL = PFACL();
@@ -85,15 +90,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //
         //  Swift 2.0
         //
-        //        if #available(iOS 8.0, *) {
-        //            let types: UIUserNotificationType = [.Alert, .Badge, .Sound]
-        //            let settings = UIUserNotificationSettings(forTypes: types, categories: nil)
-        //            application.registerUserNotificationSettings(settings)
-        //            application.registerForRemoteNotifications()
-        //        } else {
-        //            let types: UIRemoteNotificationType = [.Alert, .Badge, .Sound]
-        //            application.registerForRemoteNotificationTypes(types)
-        //        }
+        if application.respondsToSelector("registerUserNotificationSettings:") {
+            let types: UIUserNotificationType = [.Alert, .Badge, .Sound]
+            let settings = UIUserNotificationSettings(forTypes: types, categories: nil)
+            application.registerUserNotificationSettings(settings)
+            application.registerForRemoteNotifications()
+            
+        }else {
+            let types = UIRemoteNotificationType.Badge
+            application.registerForRemoteNotificationTypes(types)
+        }
 
         return true
     }
@@ -107,7 +113,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         installation.setDeviceTokenFromData(deviceToken)
         installation.saveInBackground()
 
-        PFPush.subscribeToChannelInBackground("") { (succeeded: Bool, error: NSError?) in
+        PFPush.subscribeToChannelInBackground("Channel1") { (succeeded: Bool, error: NSError?) in
             if succeeded {
                 print("ParseStarterProject successfully subscribed to push notifications on the broadcast channel.\n");
             } else {
@@ -130,7 +136,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
         }
     }
-
+    
     ///////////////////////////////////////////////////////////
     // Uncomment this method if you want to use Push Notifications with Background App Refresh
     ///////////////////////////////////////////////////////////

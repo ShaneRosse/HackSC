@@ -9,6 +9,7 @@
 
 import UIKit
 import MapKit
+import Parse
 
 class ViewController: UIViewController,MKMapViewDelegate, CLLocationManagerDelegate {
     let MY_PLAYER=0, OTHER_PLAYER=1
@@ -21,12 +22,11 @@ class ViewController: UIViewController,MKMapViewDelegate, CLLocationManagerDeleg
     @IBOutlet weak var mapView: MKMapView!
     
     @IBAction func MoveUp(sender: UIButton) {
-        //mapView.removeAnnotation(players[MY_PLAYER])
-        players[MY_PLAYER].coordinate.latitude+=0.0001
-        let long=players[MY_PLAYER].coordinate.longitude
-        let lat=players[MY_PLAYER].coordinate.latitude
-        centerMapOnLocation(CLLocation(latitude: lat ,longitude: long))
-        //mapView.addAnnotation(players[MY_PLAYER])
+        let push = PFPush()
+        push.setChannel("Channel1")
+        push.setMessage("This is a Push!")
+        push.sendPushInBackground()
+        
     }
     
     override func viewDidLoad() {
@@ -84,10 +84,9 @@ class ViewController: UIViewController,MKMapViewDelegate, CLLocationManagerDeleg
         let newLocation = locations.last!
         
         if playerLocationSet {
-            //mapView.removeAnnotation(players[MY_PLAYER])
-            players[MY_PLAYER].coordinate=newLocation.coordinate
+            players[MY_PLAYER].setLocation(newLocation.coordinate)
             centerMapOnCoordinate(players[MY_PLAYER].coordinate)
-            //mapView.addAnnotation(players[MY_PLAYER])
+            print(players[MY_PLAYER].geoPoint)
         } else {
             print("setting up locs")
             setupPlayerLocations()
@@ -133,20 +132,13 @@ class ViewController: UIViewController,MKMapViewDelegate, CLLocationManagerDeleg
 
     }
     func centerMapOnLocation(location: CLLocation) {
-        
-        mapView.centerCoordinate=location.coordinate;
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
-            regionRadius * 2.0, regionRadius * 2.0)
-        mapView.setRegion(coordinateRegion, animated: true)
+        mapView.setCenterCoordinate(location.coordinate, animated: true)
         
     }
-    func centerMapOnCoordinate(location: CLLocationCoordinate2D) {
-        
-        mapView.centerCoordinate=location;
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location,
+    func centerMapOnCoordinate(coordinate: CLLocationCoordinate2D) {
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(coordinate,
             regionRadius * 2.0, regionRadius * 2.0)
-        mapView.setRegion(coordinateRegion, animated: false)
-        
+        mapView.setRegion(coordinateRegion, animated: true)
     }
     
 }

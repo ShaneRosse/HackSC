@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -18,29 +17,38 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="cPW-1h-SFU">
-                                <rect key="frame" x="20" y="50" width="560" height="530"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="cPW-1h-SFU">
+                                <rect key="frame" x="20" y="52" width="560" height="500"/>
                                 <animations/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uPP-Cd-aml">
-                                <rect key="frame" x="170" y="10" width="260" height="30"/>
+                                <rect key="frame" x="170" y="560" width="260" height="30"/>
                                 <animations/>
-                                <state key="normal" title="Move Up"/>
+                                <state key="normal" title="Send Notification"/>
                                 <connections>
-                                    <action selector="MoveUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="81E-JX-CTa"/>
+                                    <action selector="MoveUp:" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="4rZ-Jx-msw"/>
                                 </connections>
                             </button>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KT5-FK-9oK">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <animations/>
+                                <items>
+                                    <navigationItem title="Convergent" id="qTo-gj-OEJ">
+                                        <barButtonItem key="leftBarButtonItem" title="Item" id="1C4-i5-wr9"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="cPW-1h-SFU" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="30" id="0Zx-4b-CI8"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="uPP-Cd-aml" secondAttribute="bottom" constant="10" id="J4b-g2-Inv"/>
                             <constraint firstItem="cPW-1h-SFU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="JgW-2X-pGw"/>
                             <constraint firstItem="cPW-1h-SFU" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="WIF-Rt-62P"/>
                             <constraint firstItem="uPP-Cd-aml" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="150" id="X5P-zx-LPX"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="cPW-1h-SFU" secondAttribute="bottom" constant="20" id="afQ-gF-fyz"/>
-                            <constraint firstItem="uPP-Cd-aml" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="10" id="h47-uZ-ECo"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="cPW-1h-SFU" secondAttribute="bottom" constant="40" id="afQ-gF-fyz"/>
                             <constraint firstAttribute="trailingMargin" secondItem="uPP-Cd-aml" secondAttribute="trailing" constant="150" id="ibV-7a-ATZ"/>
+                            <constraint firstItem="cPW-1h-SFU" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="yMX-ON-Aci"/>
                         </constraints>
                     </view>
                     <connections>
@@ -49,7 +57,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="351" y="304"/>
+            <point key="canvasLocation" x="394" y="314"/>
         </scene>
     </scenes>
 </document>
