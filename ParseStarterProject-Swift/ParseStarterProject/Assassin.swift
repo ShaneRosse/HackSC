@@ -10,21 +10,53 @@ import Foundation
 import MapKit
 
 class Assassin: NSObject, MKAnnotation {
-    let title: String
-    let locationName: String
-    let discipline: String
-    let coordinate: CLLocationCoordinate2D
+    let name: String?
+    var coordinate: CLLocationCoordinate2D
+    var points: Int
     
-    init(title: String, locationName: String, discipline: String, coordinate: CLLocationCoordinate2D) {
-        self.title = title
-        self.locationName = locationName
-        self.discipline = discipline
+    init(name: String?, coordinate: CLLocationCoordinate2D) {
+        self.name = name
         self.coordinate = coordinate
-        
+        self.points=0
         super.init()
     }
     
-    var subtitle: String {
-        return locationName
+    /*class func fromJSON(json: [JSONValue]) -> Assassin? {
+        // 1
+        var title: String
+        if let titleOrNil = json[16].string {
+            title = titleOrNil
+        } else {
+            title = ""
+        }
+        let locationName = json[12].string
+        let discipline = json[15].string
+        
+        // 2
+        let latitude = (json[18].string! as NSString).doubleValue
+        let longitude = (json[19].string! as NSString).doubleValue
+        let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        
+        // 3
+        return Assassin(name: title, locationName: locationName!, coordinate: coordinate)
+    }*/
+    
+    func distanceFrom(other: Assassin)->CLLocationDistance{
+        let deltaLatitude=self.coordinate.latitude-other.coordinate.latitude
+        let deltaLongitude=self.coordinate.longitude-other.coordinate.longitude
+        let distance=sqrt(pow(deltaLatitude,2)+pow(deltaLongitude,2))
+        return distance
     }
+    
+    func parserUpdate(){
+        
+    }
+    
+    func selfUpdate(){
+        
+    }
+    
+    
+    
+    
 }
